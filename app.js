@@ -12,7 +12,27 @@ function addTaskFromInput() {
 
 // Étudiant 1 : Implémenter cette fonction
 function addTask(text) {
-  // TODO: Votre code ici
+  // Validation
+  if (!text || text.trim() === "") {
+    alert("❌ La tâche ne peut pas être vide");
+    return;
+  }
+
+  // Créer tâche
+  const task = {
+    id: Date.now(),
+    text: text.trim(),
+    completed: false,
+    createdAt: new Date().toISOString(),
+  };
+
+  // Ajouter au tableau
+  todos.push(task);
+  console.log("✅ Tâche ajoutée:", task);
+
+  // Rafraîchir affichage
+  displayTasks();
+  updateStats();
 }
 
 // Étudiant 2 : Implémenter cette fonction
@@ -56,7 +76,29 @@ function displayTasks() {
 
 // Étudiant 3 : Implémenter ces fonctions
 function deleteTask(id) {
-  // TODO: Votre code ici
+  const index = todos.findIndex((t) => t.id === id);
+
+  if (index > -1) {
+    const deleted = todos.splice(index, 1);
+    console.log("✅ Tâche supprimée:", deleted[0]);
+    displayTasks();
+    updateStats();
+  } else {
+    console.error("❌ Tâche non trouvée");
+  }
+}
+
+function toggleTask(id) {
+  const task = todos.find((t) => t.id === id);
+
+  if (task) {
+    task.completed = !task.completed;
+    console.log(`✅ Tâche ${task.completed ? "terminée" : "réactivée"}:`, task);
+    displayTasks();
+    updateStats();
+  } else {
+    console.error("❌ Tâche non trouvée");
+  }
 }
 
 function toggleTask(id) {
@@ -64,14 +106,8 @@ function toggleTask(id) {
 }
 
 // Étudiant 4 : Implémenter ces fonctions
-function filterTasks(status) {
-  // TODO: Votre code ici
-}
+function filterTasks(status) {}
 
-function displayFilteredTasks(status) {
-  // TODO: Votre code ici
-}
+function displayFilteredTasks(status) {}
 
-function updateStats() {
-  // TODO: Votre code ici
-}
+function updateStats() {}

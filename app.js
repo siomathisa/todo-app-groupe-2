@@ -22,7 +22,29 @@ function displayTasks() {
 
 // Étudiant 3 : Implémenter ces fonctions
 function deleteTask(id) {
-    // TODO: Votre code ici
+    const index = todos.findIndex(t => t.id === id);
+
+    if (index > -1) {
+        const deleted = todos.splice(index, 1);
+        console.log('✅ Tâche supprimée:', deleted[0]);
+        displayTasks();
+        updateStats();
+    } else {
+        console.error('❌ Tâche non trouvée');
+    }
+}
+
+function toggleTask(id) {
+    const task = todos.find(t => t.id === id);
+
+    if (task) {
+        task.completed = !task.completed;
+        console.log(`✅ Tâche ${task.completed ? 'terminée' : 'réactivée'}:`, task);
+        displayTasks();
+        updateStats();
+    } else {
+        console.error('❌ Tâche non trouvée');
+    }
 }
 
 function toggleTask(id) {
